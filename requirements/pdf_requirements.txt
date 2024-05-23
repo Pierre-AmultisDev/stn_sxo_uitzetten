@@ -1,0 +1,23 @@
+# =============================================================================
+#
+# @package    stn_sxo_uitzetten
+# @container  create_pdf_from_csv
+# @name       requirements.txt
+# @purpose    pip requirements file
+# @version    v0.0.2  2024-05-19
+# @author     pierre@amultis.dev
+# @copyright  (C) 2020-2024 Pierre Veelen
+#
+# =============================================================================
+
+# DATABASE HANDLING
+# =================
+
+# DATA HANDLING
+# =================
+openpyxl==3.1.2
+pandas==2.2.2
+
+# PDF HANDLING
+# =================
+borb==2.1.3
