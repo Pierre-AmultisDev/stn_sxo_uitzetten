@@ -4,7 +4,7 @@
 # @container  stn_sxo_uitzetten
 # @name       .gitignore
 # @purpose    files and folders to ignore by git
-# @version    v0.0.1  2022-04-29
+# @version    v0.0.2  2024-06-04
 # @author     pierre@amultis.dev
 # @copyright  (C) 2020-2024 Pierre Veelen
 #
@@ -13,6 +13,8 @@
 # GENERIC
 # =============
 /history
+/historie
+/old
 /examples
 TODO*
 UUID*

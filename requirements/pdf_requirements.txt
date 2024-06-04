@@ -20,4 +20,4 @@ pandas==2.2.2
 
 # PDF HANDLING
 # =================
-borb==2.1.3
+borb==2.1.23

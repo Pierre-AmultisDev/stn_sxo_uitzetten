@@ -43,17 +43,32 @@ select distinct
 ,  z.toelichting as toelichting
 ,  r.omschrijving as zaak_resultaat
 
--- ,  n.onderwerp as notitie_onderwerp
--- ,  n.tekst as notitie_tekst
--- ,  n.medewerker as notitie_opsteller
--- ,  n.datum as notitie_datum 
+,  n.onderwerp as notitie_onderwerp
+,  n.tekst as notitie_tekst
+,  n.medewerker as notitie_opsteller
+,  n.datum as notitie_datum 
 
+-- ,  zp.code as zaaktype_code
 ,  zp.naam as zaaktype_naam
 
 ,  f.omschrijving as zaak_fase_omschrijving
 
--- , 'bouwgegevens' as div4
--- , bg.*
+/*
+, 'zaak' as div0
+, z.*
+
+, 'deelzaak2'as div2
+, dz2.*
+
+, 'deelzaak1'as div1
+, dz1.* 
+
+, 'hoofdzaak' as div3
+, hz.*
+*/
+
+, 'bouwgegevens' as div4
+, bg.*
 
 
 from 
@@ -65,8 +80,8 @@ from
    left join zaaktype_parent zp on z.zaaktype_id = zp.id
    left join resultaat r on z.zaak_resultaat_id = r.id
    left join fase f on z.fase_id = f.id
---   left join vw_g_notities n on z.id = n.zaak_id
---   left join vw_g_onderdeel_bouw bg on z.id=bg.hoofdzaak_id
+   left join vw_g_notities n on z.id = n.zaak_id
+   left join vw_g_onderdeel_bouw bg on z.id=bg.hoofdzaak_id
 
 where 0=0
 
