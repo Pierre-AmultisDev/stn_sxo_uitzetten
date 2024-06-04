@@ -4,7 +4,7 @@
 #
 # @package    stn_sxo_uitzetten
 # @container  create_pdf_from_csv
-# @name       create_pdf_from_csv.spec
+# @name       create_pdf_from_csv_borb.spec
 # @purpose    pyinstaller spec file
 # @version    v0.0.1  2022-04-29
 # @author     pierre@amultis.dev
@@ -13,7 +13,7 @@
 # =============================================================================
 
 a = Analysis(
-    ['create_pdf_from_csv.py'],
+    ['create_pdf_from_csv_borb.py'],
     pathex=[],
     binaries=[],
     datas=[],
@@ -32,7 +32,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='create_pdf_from_csv',
+    name='create_pdf_from_csv_borb',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

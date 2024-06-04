@@ -1,3 +1,14 @@
+::# =============================================================================
+::#
+::# @package    stn_sxo_uitzetten
+::# @container  retrieve_data
+::# @name       run_queries_oracle.bat
+::# @purpose    batch files to start exe
+::# @version    v0.0.2  2024-06-04
+::# @author     pierre@amultis.dev
+::# @copyright  (C) 2020-2024 Pierre Veelen
+::#
+::# =============================================================================
 @echo off
 
 :: BASIC SETTINGS
