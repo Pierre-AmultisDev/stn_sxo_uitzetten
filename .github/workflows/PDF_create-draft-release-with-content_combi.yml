@@ -16,7 +16,7 @@ env:
   # ==============================
   
   # name of the python app without .py extension
-  AMUDEV_PYTHON_APP: "create_pdf_from_csv"
+  AMUDEV_PYTHON_APP: "create_pdf_from_csv_borb"
 
   # prefix for pip requirements file
   AMUDEV_PREFIX_REQ: "pdf_"
