@@ -1,5 +1,0 @@
-SELECT * 
-FROM wabo_bouwgegevens bg
-Left join bouwwerktype bt ON bg.bouwwerktype_id = bt.id 
-Left join bouwactiviteit ba ON bg.bouwactiviteit_id = ba.id
-

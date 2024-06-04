@@ -12,9 +12,11 @@
 
 # GENERIC
 # =============
-/history
+#/history
+*/history/*
 /historie
-/old
+#/old
+*/old/*
 /examples
 TODO*
 UUID*
