@@ -11,29 +11,39 @@
 # =============================================================================
 
 # GENERIC
-# =============
-#/history
-*/history/*
-/historie
-#/old
-*/old/*
-/examples
+# ====================
+# all kind of folders
+history
+historie
+old
+examples
+secret
+geheim
+secure
+
+# files
 TODO*
+ToDo*
+TO_DO*
+To_Do*
 UUID*
 
 # IDE 
-# =============
-__pycache__
+# ====================
 .vscode
 .idea
 
+# Python 
+# ====================
+__pycache__
+
 # BUILD
-# =============
+# ====================
 /dist
 /build
 
-# APPLICATION
-# =============
+# APPLICATION SPECIFIC
+# ====================
 /output*
 /input
 /log
