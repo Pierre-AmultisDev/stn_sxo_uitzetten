@@ -1,3 +1,14 @@
+/*# =============================================================================
+  #
+  # @package    stn_sxo_uitzetten
+  # @container  retrieve_data
+  # @name       retrieve_all_zaken.sql
+  # @purpose    SQL statements to retrieve zaken information
+  # @author     pierre@amultis.dev
+  # @copyright  (C) 2020-2024 Pierre Veelen
+  #
+  # =============================================================================
+*/
 select distinct
 
  CASE -- als zaakid een deelzaak is vul dan hoofdzaak id in. Anders eigen zaak id
