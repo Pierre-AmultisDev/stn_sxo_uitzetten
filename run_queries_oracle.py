@@ -15,7 +15,7 @@ from remove_rtf_formatting import remove_rtf_formatting
 # =====================================
 # SETUP SECTION
 # =====================================
-this_version = "v006"
+this_version = "v007"
 print("[INFO   ] Retrieve data from oracle db to pandas df " + this_version + " gestart ...")
 print("[INFO   ] Gestart om:", datetime.datetime.now())
 
@@ -113,11 +113,18 @@ else:
                     df_all['NOTITIE_TEKST'+'_CLEAN'] = df_all['NOTITIE_TEKST'].apply(remove_rtf_formatting)
                     df_all.drop(columns=['NOTITIE_TEKST'], inplace=True)
 
+                # set date format for all columns to string
+                for column_name in df_all.columns.tolist():
+                    df_all[column_name] = df_all[column_name].astype(str)
+                
+                if dbg_lvl_df > 0:
+                    print(df_all.dtypes)
+                
                 # save dataframe contents
                 df_all.to_csv(sql_output_path+qry+".csv", index=False, sep=';', quotechar='"', quoting=csv.QUOTE_ALL)
 
                 if len(df_all) < max_excel_lines and output_to_excel.lower() == "true":
-                    df_all.to_excel(sql_output_path+qry+".xlsx", index=False)
+                    df_all.to_excel(sql_output_path+qry+".xlsx", index=False, )
 
                 if dbg_lvl_df > 0:
                     print(df_all.head())
