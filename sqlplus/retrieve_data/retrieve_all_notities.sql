@@ -1,15 +1,3 @@
-/*# =============================================================================
-  #
-  # @package    stn_sxo_uitzetten
-  # @container  retrieve_data
-  # @name       retrieve_all_notities.sql
-  # @purpose    SQL statements to retrieve notities information
-  # @version    v0.0.2  2024-06-04
-  # @author     pierre@amultis.dev
-  # @copyright  (C) 2020-2024 Pierre Veelen
-  #
-  # =============================================================================
-*/
 select distinct
 
  CASE -- als zaakid een deelzaak is vul dan hoofdzaak id in. Anders eigen zaak id

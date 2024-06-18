@@ -113,10 +113,16 @@ else:
                     df_all['NOTITIE_TEKST'+'_CLEAN'] = df_all['NOTITIE_TEKST'].apply(remove_rtf_formatting)
                     df_all.drop(columns=['NOTITIE_TEKST'], inplace=True)
 
-                # set date format for all columns to string
+                # set data format for all columns to string
                 for column_name in df_all.columns.tolist():
                     df_all[column_name] = df_all[column_name].astype(str)
-                
+                    
+                    # Cleanup
+                    if column_name not in ['SQUITXO_ZAAKNUMMER'. 'OMSCHRIJVING', 'GLOBALE_LOCATIE',]:
+                        df_all[column_name] = df_all[column_name].str.replace('NaT','')
+                        df_all[column_name] = df_all[column_name].str.replace('None','')
+                        df_all[column_name] = df_all[column_name].str.replace('nan','')
+                    
                 if dbg_lvl_df > 0:
                     print(df_all.dtypes)
                 
