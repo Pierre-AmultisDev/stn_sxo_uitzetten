@@ -118,7 +118,7 @@ else:
                     df_all[column_name] = df_all[column_name].astype(str)
                     
                     # Cleanup
-                    if column_name not in ['SQUITXO_ZAAKNUMMER'. 'OMSCHRIJVING', 'GLOBALE_LOCATIE',]:
+                    if column_name not in ['SQUITXO_ZAAKNUMMER', 'OMSCHRIJVING', 'GLOBALE_LOCATIE']:
                         df_all[column_name] = df_all[column_name].str.replace('NaT','')
                         df_all[column_name] = df_all[column_name].str.replace('None','')
                         df_all[column_name] = df_all[column_name].str.replace('nan','')
