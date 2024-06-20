@@ -117,8 +117,10 @@ else:
                 for column_name in df_all.columns.tolist():
                     df_all[column_name] = df_all[column_name].astype(str)
                     
-                    # Cleanup
+                    # Cleanup column data
+                    # ===================
                     if column_name not in ['SQUITXO_ZAAKNUMMER', 'OMSCHRIJVING', 'GLOBALE_LOCATIE']:
+                        # remove Nat, nan, None
                         df_all[column_name] = df_all[column_name].str.replace('NaT','')
                         df_all[column_name] = df_all[column_name].str.replace('None','')
                         df_all[column_name] = df_all[column_name].str.replace('nan','')
@@ -130,6 +132,10 @@ else:
                         df_all[column_name] = df_all[column_name].str.replace(',','')
                         df_all[column_name] = df_all[column_name].str.replace('.',',')
                         
+                    if column_name in ["NOTITIE_DATUM", "ZAAK_STARTDATUM"]:
+                        # remove time part from date-time
+                        df_all[column_name] = df_all[column_name].str[:10]
+
                 if dbg_lvl_df > 0:
                     print(df_all.dtypes)
                 
