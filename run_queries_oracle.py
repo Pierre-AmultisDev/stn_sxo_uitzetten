@@ -123,6 +123,13 @@ else:
                         df_all[column_name] = df_all[column_name].str.replace('None','')
                         df_all[column_name] = df_all[column_name].str.replace('nan','')
                     
+                    if column_name in ["OUDE_OPPERVLAKTE", "NIEUWE_OPPERVLAKTE", "OUDE_INHOUD", "NIEUWE_INHOUD",
+                                       "VASTGESTELDE_KOSTEN", "VASTGESTELDE_KOSTEN_INC", "BOUWKOSTEN", "BOUWKOSTEN_INC",
+                                       "GEWIJZIGDE_KOSTEN", "GEWIJZIGDE_KOSTEN_INC"]:
+                        # changes float notation from English to Dutch (thousands , -> "" and  decimals . -> ,)                         
+                        df_all[column_name] = df_all[column_name].str.replace(',','')
+                        df_all[column_name] = df_all[column_name].str.replace('.',',')
+                        
                 if dbg_lvl_df > 0:
                     print(df_all.dtypes)
                 
