@@ -1,14 +1,21 @@
 select distinct
 
- CASE -- als zaakid een deelzaak is vul dan hoofdzaak id in. Anders eigen zaak id
-	WHEN dz1.hoofdzaak_id is not NULL
-      THEN dz1.hoofdzaak_id -- dit is een deelzaak kies hoofdzaak id
-      ELSE z.id -- dit is geen deelzaak kies het eigen zaak id
-   END hoofdzaakid
+   z.id AS zaakid
+,  CASE -- als zaakid een deelzaak is vul dan hoofdzaak id in. Anders eigen zaak id
+	  WHEN dz.hoofdzaak_id is not NULL
+        THEN dz.hoofdzaak_id -- dit is een deelzaak kies hoofdzaak id
+        ELSE z.id -- dit is geen deelzaak kies het eigen zaak id
+    END hoofdzaakid
 
 ,  z.aanvraagnummer_string as squitxo_zaaknummer
 
 ,  z.extern_zaaknummer as extern_zaaknummer
+
+,  CASE -- als zaakid een deelzaak is vul dan hoofdzaak sxo nummer in. Anders verklarende tekst
+	  WHEN dz.hoofdzaak_id is not NULL
+        THEN z.AANVRAAGNUMMER_STRING -- dit is een deelzaak kies hoofdzaak sxo nummer
+        ELSE 'dit is een hoofdzaak' -- dit is geen deelzaak kies het eigen zaak id
+    END squitxo_hoofdzaaknummer
 
 ,  z.globale_locatie_aanduiding as globale_locatie
 
@@ -21,9 +28,9 @@ select distinct
 
 from 
    zaak z
-   left join deelzaak dz1 on z.id=dz1.id
-   left join deelzaak dz2 on z.id=dz2.hoofdzaak_id
+   left join deelzaak dz on z.id=dz.id
    left join vw_g_notities n on z.id = n.zaak_id
+   join vw_deelzaak_hoofdzaak dh ON dh.hoofdzaakid=z.id 
 
 where 0=0
 AND (n.onderwerp is not null OR n.tekst is not null OR n.medewerker is not null OR n.datum is not null)
