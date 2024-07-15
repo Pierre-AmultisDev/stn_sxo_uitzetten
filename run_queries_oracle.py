@@ -63,7 +63,7 @@ try:  # create connection with database
     con = oracledb.connect(user=un, password=pw, dsn=cs)
 
 except oracledb.DatabaseError as er:
-    print('[ERROR] There is an error in the Oracle database:', er)
+    print('[ERROR] There is an error in the Oracle database or with the connection to the Oracle database:', er)
 
 else:
     print("[INFO   ] Oracle Database version:", con.version)
@@ -73,6 +73,9 @@ else:
 
             with open(sql_input_path + qry + '.sql', 'r') as file:
                 sql_qry = file.read()
+                
+            print("[INFO   ] Running query:", sql_input_path + qry + '.sql')
+            
             if dbg_lvl_sql > 0:
                 print("[INFO   ] Query     :")
                 print("== START ===========================")

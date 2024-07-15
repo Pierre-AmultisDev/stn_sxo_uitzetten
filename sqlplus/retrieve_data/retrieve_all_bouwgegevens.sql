@@ -1,6 +1,19 @@
+/*
+ * Versie voor SquitXO
+ * ======================
+ * Datum:    20240715
+ * Versie:   002
+ * Bestand:  retreive_all_bouwgegevens.sql
+ * Auteur:   Pierre Veelen
+ *
+ * Function: Levert een table die alle bouwgegevens van een zaak (of deelzaak)
+ *
+ * ToDo: 
+ *
+ */
 SELECT 
   z.AANVRAAGNUMMER_STRING AS SQUITXO_ZAAKNUMMER
-, z.EXTERN_ZAAKNUMMER AS EXTERN_NUMMER
+, z.EXTERN_ZAAKNUMMER AS EXTERN_ZAAKNUMMER
 , z.OMSCHRIJVING as OMSCHRIJVING
 , z.GLOBALE_LOCATIE_AANDUIDING as GLOBALE_LOCATIE
 --, bw.ZAAK_ID

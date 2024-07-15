@@ -1,3 +1,16 @@
+/*
+ * Versie voor SquitXO
+ * ======================
+ * Datum:    20240715
+ * Versie:   002
+ * Bestand:  retreive_all_notities.sql
+ * Auteur:   Pierre Veelen
+ *
+ * Function: Levert een table die gegevens van de notities bij zaken van SquitXO
+ *
+ * ToDo: 
+ *
+ */
 select distinct
 
    z.id AS zaakid

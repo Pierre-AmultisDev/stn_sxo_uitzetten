@@ -1,3 +1,16 @@
+/*
+ * Versie voor SquitXO
+ * ======================
+ * Datum:    20240715
+ * Versie:   002
+ * Bestand:  retreive_all_zaken.sql
+ * Auteur:   Pierre Veelen
+ *
+ * Function: Levert een table met gegevens van alle zaken van SquitXO
+ *
+ * ToDo: 
+ *
+ */
 select distinct
 
  CASE -- als zaakid een deelzaak is vul dan hoofdzaak id in. Anders eigen zaak id

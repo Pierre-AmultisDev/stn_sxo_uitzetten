@@ -1,3 +1,16 @@
+/*
+ * Versie voor SquitXO
+ * ======================
+ * Datum:    20240715
+ * Versie:   002
+ * Bestand:  retreive_all_zaken_status.sql
+ * Auteur:   Pierre Veelen
+ *
+ * Function: Levert een table met de status van alle zaken van SquitXO
+ *
+ * ToDo: 
+ *
+ */
 select distinct
    z.startdatum as zaak_startdatum
 ,  TO_CHAR(EXTRACT(YEAR FROM z.startdatum)) as zaak_startjaar
