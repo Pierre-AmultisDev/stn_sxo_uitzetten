@@ -15,7 +15,7 @@ from remove_rtf_formatting import remove_rtf_formatting
 # =====================================
 # SETUP SECTION
 # =====================================
-this_version = "v007"
+this_version = "v008"
 print("[INFO   ] Retrieve data from oracle db to pandas df " + this_version + " gestart ...")
 print("[INFO   ] Gestart om:", datetime.datetime.now())
 
@@ -55,6 +55,8 @@ max_excel_lines = int(parameters.get("output", {}).get("max_excel_lines", 65535)
 
 dbg_lvl_df = int(parameters.get("retrievedata", {}).get("debug", {}).get("list_df", 1))
 dbg_lvl_sql = int(parameters.get("retrievedata", {}).get("debug", {}).get("list_sql", 1))
+
+filename_suffix = os.environ.get('OUTPUT_SUFFIX', '_DEFAULT')
 
 if not os.path.exists(sql_output_path):
     os.makedirs(sql_output_path)
@@ -124,15 +126,15 @@ else:
                     # ===================
                     if column_name not in ['SQUITXO_ZAAKNUMMER', 'OMSCHRIJVING', 'GLOBALE_LOCATIE']:
                         # remove Nat, nan, None
-                        df_all[column_name] = df_all[column_name].str.replace('NaT','')
-                        df_all[column_name] = df_all[column_name].str.replace('None','')
-                        df_all[column_name] = df_all[column_name].str.replace('nan','')
+                        df_all[column_name] = df_all[column_name].str.replace('NaT', '')
+                        df_all[column_name] = df_all[column_name].str.replace('None', '')
+                        df_all[column_name] = df_all[column_name].str.replace('nan', '')
                     
                     if column_name in ["OUDE_OPPERVLAKTE", "NIEUWE_OPPERVLAKTE", "OUDE_INHOUD", "NIEUWE_INHOUD",
                                        "VASTGESTELDE_KOSTEN", "VASTGESTELDE_KOSTEN_INC", "BOUWKOSTEN", "BOUWKOSTEN_INC",
                                        "GEWIJZIGDE_KOSTEN", "GEWIJZIGDE_KOSTEN_INC"]:
                         # changes float notation from English to Dutch (thousands , -> "" and  decimals . -> ,)                         
-                        df_all[column_name] = df_all[column_name].str.replace(',','')
+                        df_all[column_name] = df_all[column_name].str.replace(',',  '')
                         df_all[column_name] = df_all[column_name].str.replace('.',',')
                         
                     if column_name in ["NOTITIE_DATUM", "ZAAK_STARTDATUM"]:
@@ -143,10 +145,10 @@ else:
                     print(df_all.dtypes)
                 
                 # save dataframe contents
-                df_all.to_csv(sql_output_path+qry+".csv", index=False, sep=';', quotechar='"', quoting=csv.QUOTE_ALL)
+                df_all.to_csv(sql_output_path+qry+filename_suffix+".csv", index=False, sep=';', quotechar='"', quoting=csv.QUOTE_ALL)
 
                 if len(df_all) < max_excel_lines and output_to_excel.lower() == "true":
-                    df_all.to_excel(sql_output_path+qry+".xlsx", index=False, )
+                    df_all.to_excel(sql_output_path+qry+filename_suffix+".xlsx", index=False, )
 
                 if dbg_lvl_df > 0:
                     print(df_all.head())
