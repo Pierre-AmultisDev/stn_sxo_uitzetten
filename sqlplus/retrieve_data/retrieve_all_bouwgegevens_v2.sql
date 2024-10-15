@@ -3,10 +3,10 @@
  * ======================
  * Datum:    202409802
  * Versie:   005
- * Bestand:  retreive_all_notities.sql
+ * Bestand:  retreive_all_bouwgegevens.sql
  * Auteur:   Pierre Veelen
  *
- * Function: Levert een table die gegevens van de notities bij zaken van SquitXO
+ * Function: Levert een table die alle bouwgegevens van een zaak (of deelzaak)
  *
  * ToDo: 
  *
@@ -72,7 +72,7 @@ SELECT DISTINCT
 , 'formule' as SQUITXO_ZAAKNUMMER_S_IN_CORSA_KING_TESSIE
 , 'formule' as SQUITXO_ZAAKNUMMER_S_IN_CORSA_DOSSIERCODE_TESSIE
 , 'formule' as KOMT_VOOR_IN_CORSA
-, '' as LEEG -- hiermee wordt extra kolom gemaakt zodat alle Excel formules blijven werken. Bij docuemnten is deze kolom nl wel gevuld met een Excel formule
+, '' as LEEG -- hiermee wordt extra kolom gemaakt zodat alle Excel formules blijven werken. Bij docummenten is deze kolom nl wel gevuld met een Excel formule
 , 'PDF' as pdf_splits
 
 /* 
@@ -80,7 +80,6 @@ SELECT DISTINCT
  *
  */
  
-
 , CASE -- als zaakid een deelzaak is vul dan hoofdzaak id in. Anders eigen zaak id
 	WHEN dz.hoofdzaak_id is not NULL
       THEN -- dit is een deelzaak kies hoofdzaak id
@@ -92,22 +91,52 @@ SELECT DISTINCT
 , z.EXTERN_ZAAKNUMMER AS EXTERN_ZAAKNUMMER
 , z.OMSCHRIJVING as OMSCHRIJVING
 , z.GLOBALE_LOCATIE_AANDUIDING as GLOBALE_LOCATIE
---   z.id AS zaakid
-,  n.onderwerp as notitie_onderwerp
-,  n.tekst as notitie_tekst
-,  n.medewerker as notitie_opsteller
-,  n.datum as notitie_datum 
+--, bw.ZAAK_ID
+, bw.OUDE_OPPERVLAKTE
+, bw.NIEUWE_OPPERVLAKTE
+, bw.OUDE_INHOUD
+, bw.NIEUWE_INHOUD
+-- , bw.AANTAL_BOUWWERKEN
+-- , bw.BOUWTIJD
+, bw.VASTGESTELDE_KOSTEN
+, bw.VASTGESTELDE_KOSTEN_INC
+, bw.BOUWKOSTEN
+, bw.BOUWKOSTEN_INC
+, bw.GEWIJZIGDE_KOSTEN
+, bw.GEWIJZIGDE_KOSTEN_INC
+-- , bw.DATUM_VOORLOPIG_BOUW
+, bw.DATUM_GEREEDMELDING
+-- , bw.DATUM_VOLTOOIING
+, bw.DATUM_START_BOUW
+-- , bw.BOUWACTIVITEIT_CODE
+, bw.BOUWACTIVITEIT_OMSCHRIJVING
+-- , bw.BOUWWERKTYPE_CODE
+, bw.BOUWWERKTYPE_OMSCHRIJVING
 
-from 
-   zaak z
-   left join deelzaak dz on z.id=dz.id
-   left join vw_g_notities n on z.id = n.zaak_id
-   join vw_deelzaak_hoofdzaak dh ON dh.hoofdzaakid=z.id 
-   left join zaaktype_parent zp on z.zaaktype_id = zp.id
-   left join resultaat r on z.zaak_resultaat_id = r.id
+FROM VW_G_BOUW_UNION bw
+LEFT JOIN ZAAK z ON bw.ZAAK_ID = z.ID 
+left join deelzaak dz on z.id=dz.id
+left join zaaktype_parent zp on z.zaaktype_id = zp.id
+left join resultaat r on z.zaak_resultaat_id = r.id
 
-where 0=0
-AND (n.onderwerp is not null OR n.tekst is not null OR n.medewerker is not null OR n.datum is not null)
-
+/*
+ *   Only select rows that contain data
+ */
+WHERE bw.OUDE_OPPERVLAKTE is not null
+ OR bw.NIEUWE_OPPERVLAKTE is not null
+ OR bw.OUDE_INHOUD is not null
+ OR bw.NIEUWE_INHOUD is not null
+ OR bw.VASTGESTELDE_KOSTEN is not null
+ OR bw.VASTGESTELDE_KOSTEN_INC is not null
+ OR bw.BOUWKOSTEN is not null
+ OR bw.BOUWKOSTEN_INC is not null
+ OR bw.GEWIJZIGDE_KOSTEN is not null
+ OR bw.GEWIJZIGDE_KOSTEN_INC is not null
+ OR bw.DATUM_GEREEDMELDING is not null
+ OR bw.DATUM_START_BOUW is not null
+ OR BOUWACTIVITEIT_OMSCHRIJVING is not null
+ OR bw.BOUWWERKTYPE_OMSCHRIJVING is not null
+ 
 ORDER BY 
    z.AANVRAAGNUMMER_STRING
+--,  z.startdatum

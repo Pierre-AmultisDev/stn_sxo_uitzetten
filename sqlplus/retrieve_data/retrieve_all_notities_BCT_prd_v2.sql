@@ -1,9 +1,9 @@
 /*
  * Versie voor SquitXO
  * ======================
- * Datum:    202409802
- * Versie:   005
- * Bestand:  retreive_all_notities.sql
+ * Datum:    20241007
+ * Versie:   006
+ * Bestand:  retreive_all_notities_BCT_prd_v2.sql
  * Auteur:   Pierre Veelen
  *
  * Function: Levert een table die gegevens van de notities bij zaken van SquitXO
@@ -13,17 +13,18 @@
  */
 SELECT DISTINCT
 
-/* 
- * Info t.b.v. beoordeling door Tessie en Bianca
- *
- */
+-- /* 
+--  * Info t.b.v. beoordeling door Tessie en Bianca
+--  *
+--  */
 
-  TO_CHAR(EXTRACT(YEAR FROM z.startdatum)) as zaak_startjaar
-, z.startdatum as zaak_startdatum
-, TO_CHAR(EXTRACT(YEAR FROM z.einddatum)) as zaak_eindjaar
-, z.einddatum as zaak_einddatum
-, r.omschrijving as zaak_resultaat
-, zp.naam as zaaktype_naam
+--   TO_CHAR(EXTRACT(YEAR FROM z.startdatum)) as zaak_startjaar 
+-- , z.startdatum as zaak_startdatum
+-- , TO_CHAR(EXTRACT(YEAR FROM z.einddatum)) as zaak_eindjaar
+-- , z.einddatum as zaak_einddatum
+-- , r.omschrijving as zaak_resultaat
+-- , zp.naam as zaaktype_naam
+  zp.naam as zaaktype_naam
 
 /*
  * Bepalen van mogelijke varianten van SquitXO zaaknummers in Corsa
@@ -31,9 +32,9 @@ SELECT DISTINCT
  */
 -- ALS(LINKS(X2;2)="20";"B"&LINKS(X2;4)&"-"&RECHTS(X2;3);"")
 -- Kan voorkomen als dossier verwerkt is. Dan is SquitXO nummer handmatig vervangen
--- 20070002 => B2007-002
+-- 20070002 => B2007-002 
 , CASE
-	WHEN SUBSTR(z.AANVRAAGNUMMER_STRING,1,2) = '20'
+ 	WHEN SUBSTR(z.AANVRAAGNUMMER_STRING,1,2) = '20'
 	   THEN 'B' || SUBSTR(z.AANVRAAGNUMMER_STRING,1,4) || '-' || SUBSTR(z.AANVRAAGNUMMER_STRING,-3,3)
 	   ELSE ''
   END SQUITXO_ZAAKNUMMER_AANGEPAST_B
@@ -56,24 +57,24 @@ SELECT DISTINCT
 	   ELSE ''
   END SQUITXO_ZAAKNUMMER_AANGEPAST_S
 
-, 'formule' as EXTERN_ZAAKNUMMER_IN_CORSA_KING_MAIK
-, 'formule' as EXTERN_ZAAKNUMMER_IN_CORSA_KING_TESSIE
-, 'formule' as EXTERN_ZAAKNUMMER_IN_CORSA_DOSSIERCODE_TESSIE
-, 'formule' as SQUITXO_ZAAKNUMMER_IN_CORSA_KING_MAIK
-, 'formule' as SQUITXO_ZAAKNUMMER_IN_CORSA_KING_TESSIE
-, 'formule' as SQUITXO_ZAAKNUMMER_IN_CORSA_DOSSIERCODE_TESSIE
-, 'formule' as SQUITXO_ZAAKNUMMER_B_IN_CORSA_KING_MAIK
-, 'formule' as SQUITXO_ZAAKNUMMER_B_IN_CORSA_KING_TESSIE
-, 'formule' as SQUITXO_ZAAKNUMMER_B_IN_CORSA_DOSSIERCODE_TESSIE
-, 'formule' as SQUITXO_ZAAKNUMMER_B_PUNT_IN_CORSA_KING_MAIK
-, 'formule' as SQUITXO_ZAAKNUMMER_B_PUNT_IN_CORSA_KING_TESSIE
-, 'formule' as SQUITXO_ZAAKNUMMER_B_PUNT_IN_CORSA_DOSSIERCODE_TESSIE
-, 'formule' as SQUITXO_ZAAKNUMMER_S_IN_CORSA_KING_MAIK
-, 'formule' as SQUITXO_ZAAKNUMMER_S_IN_CORSA_KING_TESSIE
-, 'formule' as SQUITXO_ZAAKNUMMER_S_IN_CORSA_DOSSIERCODE_TESSIE
-, 'formule' as KOMT_VOOR_IN_CORSA
-, '' as LEEG -- hiermee wordt extra kolom gemaakt zodat alle Excel formules blijven werken. Bij docuemnten is deze kolom nl wel gevuld met een Excel formule
-, 'PDF' as pdf_splits
+-- , 'formule' as EXTERN_ZAAKNUMMER_IN_CORSA_KING_MAIK
+-- , 'formule' as EXTERN_ZAAKNUMMER_IN_CORSA_KING_TESSIE
+-- , 'formule' as EXTERN_ZAAKNUMMER_IN_CORSA_DOSSIERCODE_TESSIE
+-- , 'formule' as SQUITXO_ZAAKNUMMER_IN_CORSA_KING_MAIK
+-- , 'formule' as SQUITXO_ZAAKNUMMER_IN_CORSA_KING_TESSIE
+-- , 'formule' as SQUITXO_ZAAKNUMMER_IN_CORSA_DOSSIERCODE_TESSIE
+-- , 'formule' as SQUITXO_ZAAKNUMMER_B_IN_CORSA_KING_MAIK
+-- , 'formule' as SQUITXO_ZAAKNUMMER_B_IN_CORSA_KING_TESSIE
+-- , 'formule' as SQUITXO_ZAAKNUMMER_B_IN_CORSA_DOSSIERCODE_TESSIE
+-- , 'formule' as SQUITXO_ZAAKNUMMER_B_PUNT_IN_CORSA_KING_MAIK
+-- , 'formule' as SQUITXO_ZAAKNUMMER_B_PUNT_IN_CORSA_KING_TESSIE
+-- , 'formule' as SQUITXO_ZAAKNUMMER_B_PUNT_IN_CORSA_DOSSIERCODE_TESSIE
+-- , 'formule' as SQUITXO_ZAAKNUMMER_S_IN_CORSA_KING_MAIK
+-- , 'formule' as SQUITXO_ZAAKNUMMER_S_IN_CORSA_KING_TESSIE
+-- , 'formule' as SQUITXO_ZAAKNUMMER_S_IN_CORSA_DOSSIERCODE_TESSIE
+-- , 'formule' as KOMT_VOOR_IN_CORSA
+-- , '' as LEEG -- hiermee wordt extra kolom gemaakt zodat alle Excel formules blijven werken. Bij documenten is deze kolom nl wel gevuld met een Excel formule
+-- , 'PDF' as pdf_splits
 
 /* 
  * Vanaf hier staat de zaakinfo die in pdf documenten moeten komen

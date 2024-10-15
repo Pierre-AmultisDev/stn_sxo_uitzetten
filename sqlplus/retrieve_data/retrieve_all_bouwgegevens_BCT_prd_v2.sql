@@ -3,7 +3,7 @@
  * ======================
  * Datum:    202409802
  * Versie:   005
- * Bestand:  retreive_all_bouwgegevens.sql
+ * Bestand:  retreive_all_bouwgegevens_BCT.sql
  * Auteur:   Pierre Veelen
  *
  * Function: Levert een table die alle bouwgegevens van een zaak (of deelzaak)
@@ -13,17 +13,18 @@
  */
 SELECT DISTINCT
 
-/* 
- * Info t.b.v. beoordeling door Tessie en Bianca
- *
- */
+-- /* 
+--  * Info t.b.v. beoordeling door Tessie en Bianca
+--  *
+--  */
 
-  TO_CHAR(EXTRACT(YEAR FROM z.startdatum)) as zaak_startjaar
-, z.startdatum as zaak_startdatum
-, TO_CHAR(EXTRACT(YEAR FROM z.einddatum)) as zaak_eindjaar
-, z.einddatum as zaak_einddatum
-, r.omschrijving as zaak_resultaat
-, zp.naam as zaaktype_naam
+--   TO_CHAR(EXTRACT(YEAR FROM z.startdatum)) as zaak_startjaar
+-- , z.startdatum as zaak_startdatum
+-- , TO_CHAR(EXTRACT(YEAR FROM z.einddatum)) as zaak_eindjaar
+-- , z.einddatum as zaak_einddatum
+-- , r.omschrijving as zaak_resultaat
+-- , zp.naam as zaaktype_naam
+  zp.naam as zaaktype_naam
 
 /*
  * Bepalen van mogelijke varianten van SquitXO zaaknummers in Corsa
@@ -56,24 +57,24 @@ SELECT DISTINCT
 	   ELSE ''
   END SQUITXO_ZAAKNUMMER_AANGEPAST_S
 
-, 'formule' as EXTERN_ZAAKNUMMER_IN_CORSA_KING_MAIK
-, 'formule' as EXTERN_ZAAKNUMMER_IN_CORSA_KING_TESSIE
-, 'formule' as EXTERN_ZAAKNUMMER_IN_CORSA_DOSSIERCODE_TESSIE
-, 'formule' as SQUITXO_ZAAKNUMMER_IN_CORSA_KING_MAIK
-, 'formule' as SQUITXO_ZAAKNUMMER_IN_CORSA_KING_TESSIE
-, 'formule' as SQUITXO_ZAAKNUMMER_IN_CORSA_DOSSIERCODE_TESSIE
-, 'formule' as SQUITXO_ZAAKNUMMER_B_IN_CORSA_KING_MAIK
-, 'formule' as SQUITXO_ZAAKNUMMER_B_IN_CORSA_KING_TESSIE
-, 'formule' as SQUITXO_ZAAKNUMMER_B_IN_CORSA_DOSSIERCODE_TESSIE
-, 'formule' as SQUITXO_ZAAKNUMMER_B_PUNT_IN_CORSA_KING_MAIK
-, 'formule' as SQUITXO_ZAAKNUMMER_B_PUNT_IN_CORSA_KING_TESSIE
-, 'formule' as SQUITXO_ZAAKNUMMER_B_PUNT_IN_CORSA_DOSSIERCODE_TESSIE
-, 'formule' as SQUITXO_ZAAKNUMMER_S_IN_CORSA_KING_MAIK
-, 'formule' as SQUITXO_ZAAKNUMMER_S_IN_CORSA_KING_TESSIE
-, 'formule' as SQUITXO_ZAAKNUMMER_S_IN_CORSA_DOSSIERCODE_TESSIE
-, 'formule' as KOMT_VOOR_IN_CORSA
-, '' as LEEG -- hiermee wordt extra kolom gemaakt zodat alle Excel formules blijven werken. Bij docummenten is deze kolom nl wel gevuld met een Excel formule
-, 'PDF' as pdf_splits
+-- , 'formule' as EXTERN_ZAAKNUMMER_IN_CORSA_KING_MAIK
+-- , 'formule' as EXTERN_ZAAKNUMMER_IN_CORSA_KING_TESSIE
+-- , 'formule' as EXTERN_ZAAKNUMMER_IN_CORSA_DOSSIERCODE_TESSIE
+-- , 'formule' as SQUITXO_ZAAKNUMMER_IN_CORSA_KING_MAIK
+-- , 'formule' as SQUITXO_ZAAKNUMMER_IN_CORSA_KING_TESSIE
+-- , 'formule' as SQUITXO_ZAAKNUMMER_IN_CORSA_DOSSIERCODE_TESSIE
+-- , 'formule' as SQUITXO_ZAAKNUMMER_B_IN_CORSA_KING_MAIK
+-- , 'formule' as SQUITXO_ZAAKNUMMER_B_IN_CORSA_KING_TESSIE
+-- , 'formule' as SQUITXO_ZAAKNUMMER_B_IN_CORSA_DOSSIERCODE_TESSIE
+-- , 'formule' as SQUITXO_ZAAKNUMMER_B_PUNT_IN_CORSA_KING_MAIK
+-- , 'formule' as SQUITXO_ZAAKNUMMER_B_PUNT_IN_CORSA_KING_TESSIE
+-- , 'formule' as SQUITXO_ZAAKNUMMER_B_PUNT_IN_CORSA_DOSSIERCODE_TESSIE
+-- , 'formule' as SQUITXO_ZAAKNUMMER_S_IN_CORSA_KING_MAIK
+-- , 'formule' as SQUITXO_ZAAKNUMMER_S_IN_CORSA_KING_TESSIE
+-- , 'formule' as SQUITXO_ZAAKNUMMER_S_IN_CORSA_DOSSIERCODE_TESSIE
+-- , 'formule' as KOMT_VOOR_IN_CORSA
+-- , '' as LEEG -- hiermee wordt extra kolom gemaakt zodat alle Excel formules blijven werken. Bij documenten is deze kolom nl wel gevuld met een Excel formule
+-- , 'PDF' as pdf_splits
 
 /* 
  * Vanaf hier staat de zaakinfo die in pdf documenten moeten komen
@@ -119,6 +120,24 @@ left join deelzaak dz on z.id=dz.id
 left join zaaktype_parent zp on z.zaaktype_id = zp.id
 left join resultaat r on z.zaak_resultaat_id = r.id
 
+/*
+ *   Only select rows that contain data
+ */
+WHERE bw.OUDE_OPPERVLAKTE is not null
+ OR bw.NIEUWE_OPPERVLAKTE is not null
+ OR bw.OUDE_INHOUD is not null
+ OR bw.NIEUWE_INHOUD is not null
+ OR bw.VASTGESTELDE_KOSTEN is not null
+ OR bw.VASTGESTELDE_KOSTEN_INC is not null
+ OR bw.BOUWKOSTEN is not null
+ OR bw.BOUWKOSTEN_INC is not null
+ OR bw.GEWIJZIGDE_KOSTEN is not null
+ OR bw.GEWIJZIGDE_KOSTEN_INC is not null
+ OR bw.DATUM_GEREEDMELDING is not null
+ OR bw.DATUM_START_BOUW is not null
+ OR BOUWACTIVITEIT_OMSCHRIJVING is not null
+ OR bw.BOUWWERKTYPE_OMSCHRIJVING is not null
+ 
 ORDER BY 
    z.AANVRAAGNUMMER_STRING
 --,  z.startdatum

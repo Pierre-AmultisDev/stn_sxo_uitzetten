@@ -1,8 +1,8 @@
 /*
  * Versie voor SquitXO
  * ======================
- * Datum:    202409802
- * Versie:   005
+ * Datum:    20241007
+ * Versie:   006
  * Bestand:  retreive_all_notities.sql
  * Auteur:   Pierre Veelen
  *
@@ -72,7 +72,7 @@ SELECT DISTINCT
 , 'formule' as SQUITXO_ZAAKNUMMER_S_IN_CORSA_KING_TESSIE
 , 'formule' as SQUITXO_ZAAKNUMMER_S_IN_CORSA_DOSSIERCODE_TESSIE
 , 'formule' as KOMT_VOOR_IN_CORSA
-, '' as LEEG -- hiermee wordt extra kolom gemaakt zodat alle Excel formules blijven werken. Bij docuemnten is deze kolom nl wel gevuld met een Excel formule
+, '' as LEEG -- hiermee wordt extra kolom gemaakt zodat alle Excel formules blijven werken. Bij documenten is deze kolom nl wel gevuld met een Excel formule
 , 'PDF' as pdf_splits
 
 /* 
@@ -108,6 +108,7 @@ from
 
 where 0=0
 AND (n.onderwerp is not null OR n.tekst is not null OR n.medewerker is not null OR n.datum is not null)
+AND n.tekst is not null
 
 ORDER BY 
    z.AANVRAAGNUMMER_STRING

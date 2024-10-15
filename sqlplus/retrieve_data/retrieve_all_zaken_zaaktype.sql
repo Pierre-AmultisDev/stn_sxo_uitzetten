@@ -1,9 +1,9 @@
 /*
  * Versie voor SquitXO
  * ======================
- * Datum:    20240715
+ * Datum:    20240723
  * Versie:   003
- * Bestand:  retreive_all_zaken_status.sql
+ * Bestand:  retrieve_all_zaken_zaaktype.sql
  * Auteur:   Pierre Veelen
  *
  * Function: Levert een table met de status van alle zaken van SquitXO
@@ -45,11 +45,12 @@ select distinct
    END zaak_status
 ,  z.globale_locatie_aanduiding as globale_locatie
 ,  z.omschrijving as omschrijving
+,  zp.naam as zaaktype_naam
 
 from 
    zaak z
    left join deelzaak dz1 on z.id=dz1.id
-   
+   left join zaaktype_parent zp on z.zaaktype_id = zp.id
 where 0=0
 
 order by 

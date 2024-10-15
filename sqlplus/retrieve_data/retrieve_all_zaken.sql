@@ -2,7 +2,7 @@
  * Versie voor SquitXO
  * ======================
  * Datum:    20240715
- * Versie:   002
+ * Versie:   003
  * Bestand:  retreive_all_zaken.sql
  * Auteur:   Pierre Veelen
  *
@@ -13,20 +13,28 @@
  */
 select distinct
 
- CASE -- als zaakid een deelzaak is vul dan hoofdzaak id in. Anders eigen zaak id
+-- CASE -- als zaakid een deelzaak is vul dan hoofdzaak id in. Anders eigen zaak id
+--	WHEN dz1.hoofdzaak_id is not NULL
+--      THEN dz1.hoofdzaak_id -- dit is een deelzaak kies hoofdzaak id
+--      ELSE z.id -- dit is geen deelzaak kies het eigen zaak id
+--   END hoofdzaakid
+
+  CASE -- als zaakid een deelzaak is vul dan hoofdzaak id in. Anders eigen zaak id
 	WHEN dz1.hoofdzaak_id is not NULL
-      THEN dz1.hoofdzaak_id -- dit is een deelzaak kies hoofdzaak id
-      ELSE z.id -- dit is geen deelzaak kies het eigen zaak id
-   END hoofdzaakid
+      THEN -- dit is een deelzaak kies hoofdzaak id
+	    (SELECT aanvraagnummer_string FROM zaak WHERE zaak.id = dz1.hoofdzaak_id)
+      ELSE -- dit is geen deelzaak kies het eigen zaak id
+	    (SELECT aanvraagnummer_string FROM zaak WHERE zaak.id = z.id)	  
+   END squitxo_hoofdzaaknummer
    
 ,  z.startdatum as zaak_startdatum
 ,  z.aanvraagnummer_string as squitxo_zaaknummer
 
-, CASE -- bepaal of zaakid een hoofdzaak is
-	WHEN dz2.id is not NULL
-      THEN 'JA' -- dit is een hoofdzaak
-      ELSE 'NEE' -- dit is geen hoofdzaak
-   END is_hoofdzaak
+--, CASE -- bepaal of zaakid een hoofdzaak is
+--	WHEN dz2.id is not NULL
+--      THEN 'JA' -- dit is een hoofdzaak
+--      ELSE 'NEE' -- dit is geen hoofdzaak
+--   END is_hoofdzaak
    
 , CASE -- bepaal of zaakid een deelzaak is 
 	WHEN dz1.hoofdzaak_id is not NULL
