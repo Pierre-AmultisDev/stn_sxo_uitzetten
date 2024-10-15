@@ -45,7 +45,7 @@ __pycache__
 # APPLICATION SPECIFIC
 # ====================
 /output*
-/input
+/input*
 /log
 *_connections.json
 *_parameters.json
