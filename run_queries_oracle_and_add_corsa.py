@@ -163,7 +163,7 @@ else:
                 if os.path.exists(corsa_file_path):
                     for corsafile in corsa_files_list:
                         if os.path.isfile(corsafile):
-                            df_corsa_ids.read_excel(corsa_file_path+file)
+                            df_corsa = pd.read_excel(corsa_file_path+file)
                             df_corsa.columns = df_corsa.columns.str.replace(' ', '_')
                             list_of_columns_to_check = ["SQUITXO_ZAAKNUMMER_AANGEPAST_B","SQUITXO_ZAAKNUMMER_AANGEPAST_B_PUNT","SQUITXO_ZAAKNUMMER_AANGEPAST_S","SQUITXO_HOOFDZAAKNUMMER","EXTERN_ZAAKNUMMER"]
                             for check_column in list_of_columns_to_check:
