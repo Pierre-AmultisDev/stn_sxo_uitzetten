@@ -62,6 +62,7 @@ jobs:
     - name: Install pip and requirements for the app
       run: |
         python -m pip install --upgrade pip
+        echo "[debug] AMUDEV_PREFIX_REQ: ->./requirements/${{ env.AMUDEV_PREFIX_REQ }}requirements.txt<-"
         if (Test-Path -path ./requirements/${{ env.AMUDEV_PREFIX_REQ }}requirements.txt -PathType Leaf) {
           pip install -r ./requirements/${{ env.AMUDEV_PREFIX_REQ }}requirements.txt
         }
@@ -85,8 +86,10 @@ jobs:
     - name: Build executable
       run: |
         if (Test-Path -path ${{ env.AMUDEV_PYTHON_APP }}.spec -PathType Leaf) {
+          echo ""[debug] ->pyinstaller --clean ${{ env.AMUDEV_PYTHON_APP }}.spec<-"
           pyinstaller --clean ${{ env.AMUDEV_PYTHON_APP }}.spec
         } else {
+          echo ""[debug] ->pyinstaller --clean ${{ env.AMUDEV_PYTHON_APP }}.py<-"
           pyinstaller --clean --onefile ${{ env.AMUDEV_PYTHON_APP }}.py
         }
 
