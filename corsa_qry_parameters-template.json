@@ -1,0 +1,74 @@
+{
+  "generic_info": {
+    "environment": "template",
+    "version": "v001",
+    "date": "20240328"
+  },
+  "stop_on_exception": "True",
+  "filepaths": {
+    "inputfolder": "../../../input_raw_rxmission_prod/",
+    "processed": "../../../input_raw_rxmission_prod/processed/",
+	"dumpfolder": "../../../input_raw_rxmission_prod/dumpfiles/",
+    "dbfieldsfolder": "./db_fields_definitions/",
+    "logfolder": "./log/",
+	"dataoutputfolder": "./output/",
+    "errorlogfile": "err_log",
+    "querylogfile": "qry_log",
+    "actionlogfile": "act_log"
+	"corsa_file_path": "./input_corsa/"
+	"corsa_files_list": [
+		"export zaken Corsa 3 ingekort.xlsx",
+		"samen4_ingekort.xlsx"
+	]
+    },
+  "database": {
+    "type": "sqlplus_vbox",
+    "name": {
+        "mysql_vimexx": "rxmissiondataportaal",
+        "mysql_vbox": "rxmissiondataportaal",
+        "t_sql_vbox": "rxmissiondataportaal",
+        "t_sql_vbox_test": "rxmissiondataportaal_test",
+        "t_sql_STNSQ002_tst" : "rxmission_report_test",
+        "t_sql_STNSQ002_prd" : "rxmission_report_prod",
+		"sqlplus_vbox": "sqlplus_prd"
+        }
+    },
+  "retrievedata": {
+	"debug": {
+		"list_sql": 1,
+		"list_df": 1
+	},
+    "sqlplus" : {
+	  "sql_folder": "./sqlplus/retrieve_data/",
+	  "query_list": [
+		"retrieve_all_zaken",
+		"retrieve_all_notities"
+	  ]
+	},
+    "mysql" : {
+	  "sql_folder": "./mysql/retrieve_data/",
+	  "query_list": []
+	},
+    "t_sql" : {
+	  "sql_folder": "./t_sql/retrieve_data/",
+	  "query_list": []
+	}
+  },
+  "output": {
+    "output_to_excel" : "True",
+    "max_excel_lines" : 1048576,
+    "max_errlogfile_age_days": 14,
+    "max_qrylogfile_age_days": 5,
+    "max_actlogfile_age_days": 3,
+    "zip_logfiles" : "False",
+    "verbose": 0
+  },
+  "email": {
+    "email_server" : "emailserver.com",
+    "email_userid" : "email_userid",
+    "email_password" : "email_password",
+    "email_port": "25",
+    "sender" : "Sender Environment <no-reply@emailaddress.com>",
+    "receivers_csv" : "./ontvangers.csv"
+  }
+}
