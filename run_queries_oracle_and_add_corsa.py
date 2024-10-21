@@ -171,7 +171,7 @@ else:
                             
                             
                 # save dataframe contents
-                df_all.to_csv(sql_output_path+qry+filename_suffi+"_corsa.csv", index=False, sep=';', quotechar='"', quoting=csv.QUOTE_ALL)
+                df_all.to_csv(sql_output_path+qry+filename_suffix+"_corsa.csv", index=False, sep=';', quotechar='"', quoting=csv.QUOTE_ALL)
 
                 if len(df_all) < max_excel_lines and output_to_excel.lower() == "true":
                     df_all.to_excel(sql_output_path+qry+filename_suffix+"_corsa.xlsx", index=False, )
