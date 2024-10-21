@@ -19,7 +19,7 @@ env:
   AMUDEV_PYTHON_APP: "run_queries_oracle_and_add_corsa"
 
   # prefix for pip requirements file
-  AMUDEV_PREFIX_REQ: "corsa_"
+  AMUDEV_PREFIX_REQ: "corsa_qry_"
 
   # Python version to use for building 
   AMUDEV_PYTHON_VER: "3.10"
