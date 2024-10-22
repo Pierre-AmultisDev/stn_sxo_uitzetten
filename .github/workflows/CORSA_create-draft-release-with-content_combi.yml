@@ -86,10 +86,10 @@ jobs:
     - name: Build executable
       run: |
         if (Test-Path -path ${{ env.AMUDEV_PYTHON_APP }}.spec -PathType Leaf) {
-          echo ""[debug] ->pyinstaller --clean ${{ env.AMUDEV_PYTHON_APP }}.spec<-"
+          echo "[debug] ->pyinstaller --clean ${{ env.AMUDEV_PYTHON_APP }}.spec<-"
           pyinstaller --clean ${{ env.AMUDEV_PYTHON_APP }}.spec
         } else {
-          echo ""[debug] ->pyinstaller --clean ${{ env.AMUDEV_PYTHON_APP }}.py<-"
+          echo "[debug] ->pyinstaller --clean ${{ env.AMUDEV_PYTHON_APP }}.py<-"
           pyinstaller --clean --onefile ${{ env.AMUDEV_PYTHON_APP }}.py
         }
 
