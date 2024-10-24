@@ -57,13 +57,5 @@
     "max_actlogfile_age_days": 3,
     "zip_logfiles" : "False",
     "verbose": 0
-  },
-  "email": {
-    "email_server" : "emailserver.com",
-    "email_userid" : "email_userid",
-    "email_password" : "email_password",
-    "email_port": "25",
-    "sender" : "Sender Environment <no-reply@emailaddress.com>",
-    "receivers_csv" : "./ontvangers.csv"
   }
 }
