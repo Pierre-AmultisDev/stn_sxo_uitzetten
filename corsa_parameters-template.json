@@ -1,0 +1,42 @@
+{
+  "generic_info": {
+    "environment": "vbox_test",
+    "version": "v001",
+    "date": "20241022"
+  },
+  "stop_on_exception": "True",
+  "filepaths": {
+    "input_folder": "./output_tst/",
+	  "input_files_list": [
+		"retrieve_all_bouwgegevens_BCT_tst_v2_tst.csv",
+		"retrieve_all_notities_BCT_tst_v2_tst.csv"
+	  ], 
+	  "corsa_folder": "./input_corsa/",
+	  "corsa_files_list": [
+		  "export zaken Corsa 3 ingekort.xlsx",
+		  "samen4_ingekort.xlsx"
+	  ],
+    "logfolder": "./log/",
+	  "dataoutputfolder": "./output_corsa/",
+    "errorlogfile": "err_log",
+    "querylogfile": "qry_log",
+    "actionlogfile": "act_log"
+    },
+  "output": {
+    "output_to_excel" : "True",
+    "max_excel_lines" : 1048576,
+    "max_errlogfile_age_days": 14,
+    "max_qrylogfile_age_days": 5,
+    "max_actlogfile_age_days": 3,
+    "zip_logfiles" : "False",
+    "verbose": 0
+  },
+  "email": {
+    "email_server" : "emailserver.com",
+    "email_userid" : "email_userid",
+    "email_password" : "email_password",
+    "email_port": "25",
+    "sender" : "Sender Environment <no-reply@emailaddress.com>",
+    "receivers_csv" : "./ontvangers.csv"
+  }
+}
