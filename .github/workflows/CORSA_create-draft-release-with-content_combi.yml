@@ -192,7 +192,6 @@ jobs:
         cp ./dist/${{ env.AMUDEV_PYTHON_APP }}.exe ./${{ env.AMUDEV_PYTHON_APP }}_${{ env.NEW_VERSION }}.exe
         
         cp ${GITHUB_WORKSPACE}/${{ env.AMUDEV_PREFIX_REQ }}parameters-template.json ./dist/       
-        cp ${GITHUB_WORKSPACE}/${{ env.AMUDEV_PREFIX_REQ }}connections-template.json ./dist/
         
         mkdir -p ./dist/sqlplus/retrieve_data/
         cp ${GITHUB_WORKSPACE}/sqlplus/retrieve_data/*.sql ./dist/sqlplus/retrieve_data/
