@@ -1,0 +1,21 @@
+# =============================================================================
+#
+# @package    stn_sxo_uitzetten
+# @container  run_queries_oracle
+# @name       corsa_requirements.txt
+# @purpose    pip requirements file
+# @version    v0.0.3  2024-10-21
+# @author     pierre@amultis.dev
+# @copyright  (C) 2020-2024 Pierre Veelen
+#
+# =============================================================================
+
+# DATABASE HANDLING
+# =================
+#oracledb==2.1.1
+#cryptography==43.0.3
+
+# DATA HANDLING
+# =================
+openpyxl==3.1.2
+pandas==2.2.2
