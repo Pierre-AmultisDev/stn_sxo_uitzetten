@@ -7,7 +7,7 @@ import pandas as pd
 # =====================================
 # SE TUP SECTION
 # =====================================
-this_version = "v001"
+this_version = "v002"
 print("[INFO   ] Combineren van data uit squit oracle db met corsa dossierid" + this_version + " gestart ...")
 print("[INFO   ] Gestart om:", datetime.datetime.now())
 
@@ -40,8 +40,8 @@ for input_file in input_files_list:
         corsa_df.drop_duplicates(inplace=True, ignore_index=True) 
         
         for index, row in input_df.iterrows():
-            for check_column in ['EXTERN_ZAAKNUMMER', 'SQUITXO_ZAAKNUMMER_AANGEPAST_B',
-                                'SQUITXO_ZAAKNUMMER_AANGEPAST_B_PUNT', 'SQUITXO_ZAAKNUMMER_AANGEPAST_S']:
+            for check_column in ['SQTXO_EZ', 'SQUITXO_ZAAKNUMMER_AANGEPAST_B',
+                                 'SQUITXO_ZAAKNUMMER_AANGEPAST_B_PUNT', 'SQUITXO_ZAAKNUMMER_AANGEPAST_S']:
 
                 # check if value in check column is in the corsa file
                 # print("-----------------------------------------")
