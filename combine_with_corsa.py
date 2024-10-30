@@ -40,7 +40,7 @@ for input_file in input_files_list:
         corsa_df.drop_duplicates(inplace=True, ignore_index=True) 
         
         for index, row in input_df.iterrows():
-            for check_column in ['SQTXO_EZ', 'SQUITXO_ZAAKNUMMER_AANGEPAST_B',
+            for check_column in ['EXTERN_ZAAKNUMMER', 'SQUITXO_ZAAKNUMMER_AANGEPAST_B',
                                  'SQUITXO_ZAAKNUMMER_AANGEPAST_B_PUNT', 'SQUITXO_ZAAKNUMMER_AANGEPAST_S']:
 
                 # check if value in check column is in the corsa file
